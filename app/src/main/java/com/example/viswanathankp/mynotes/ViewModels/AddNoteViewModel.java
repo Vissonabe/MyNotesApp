@@ -7,19 +7,26 @@ import android.os.AsyncTask;
 
 import com.example.viswanathankp.mynotes.DB.AppDatabase;
 import com.example.viswanathankp.mynotes.DB.Note;
+import com.example.viswanathankp.mynotes.MyApplication;
 import com.example.viswanathankp.mynotes.Utils.ImageSaver;
+
+import javax.inject.Inject;
 
 /**
  * Created by viswanathan.kp on 26/02/18.
  */
 
-public class AddNoteViewModel extends AndroidViewModel {
+public class AddNoteViewModel extends BaseViewModel {
 
-    private AppDatabase appDatabase;
+    @Inject
+    public AppDatabase appDatabase;
 
     public AddNoteViewModel(Application application) {
         super(application);
-        appDatabase = AppDatabase.getDatabase(this.getApplication());
+
+        ((MyApplication) application)
+                .getMyComponent()
+                .inject(this);
     }
 
     public String saveImageToFile(Bitmap bitmap){

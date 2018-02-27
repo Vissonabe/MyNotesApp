@@ -12,7 +12,7 @@ import android.content.Context;
 @Database(entities = {Note.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
-    private static final String DB_NAME = "note_db";
+    public static final String DB_NAME = "note_db";
 
     private static AppDatabase INSTANCE;
 

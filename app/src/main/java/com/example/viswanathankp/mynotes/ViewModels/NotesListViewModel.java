@@ -7,25 +7,31 @@ import android.support.annotation.NonNull;
 
 import com.example.viswanathankp.mynotes.DB.AppDatabase;
 import com.example.viswanathankp.mynotes.DB.Note;
+import com.example.viswanathankp.mynotes.MyApplication;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by viswanathan.kp on 26/02/18.
  */
 
-public class NotesListViewModel extends AndroidViewModel {
+public class NotesListViewModel extends BaseViewModel {
 
     private LiveData<List<Note>> notesList;
 
-    private AppDatabase appDatabase;
+    @Inject
+    public AppDatabase appDatabase;
 
     public NotesListViewModel(@NonNull Application application) {
         super(application);
 
-        appDatabase = AppDatabase.getDatabase(this.getApplication());
+        ((MyApplication) application)
+                .getMyComponent()
+                .inject(this);
 
         notesList = appDatabase.noteModel().getAllNotes();
     }
